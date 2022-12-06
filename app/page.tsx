@@ -3,7 +3,12 @@ import React from "react";
 type Props = {};
 
 const HomePage = (props: Props) => {
-  return <div></div>;
+  return (
+    <main>
+      {/* MessageList */}
+      {/* ChatInput */}
+    </main>
+  );
 };
 
 export default HomePage;

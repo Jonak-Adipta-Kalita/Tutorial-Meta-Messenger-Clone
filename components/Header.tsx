@@ -7,21 +7,33 @@ const Header = (props: Props) => {
   const session = true;
 
   return (
-    <header className="sticky top-0 z-50 bg-white flex justify-center items-center p-10 shadow-sm">
+    <header
+      className={`sticky top-0 z-50 bg-white flex justify-center items-center p-10 shadow-sm ${
+        session && "justify-between"
+      }`}
+    >
       {session ? (
-        <div className="flex space-x-2">
-          <Image
-            src="https://links.papareact.com/jne"
-            alt="profile-pic"
-            height={10}
-            width={50}
-            className="rounded-full mx-2 object-contain"
-          />
-          <div className="">
-            <p className="">Logged in as:</p>
-            <p className="">JAK Clone</p>
+        <>
+          <div className="flex space-x-2">
+            <Image
+              src="https://links.papareact.com/jne"
+              alt="profile-pic"
+              height={10}
+              width={50}
+              className="rounded-full mx-2 object-contain"
+            />
+            <div className="">
+              <p className="text-blue-400">Logged in as:</p>
+              <p className="font-bold text-lg">JAK Clone</p>
+            </div>
           </div>
-        </div>
+          <button
+            onClick={() => {}}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Sign Out
+          </button>
+        </>
       ) : (
         <div className="flex flex-col items-center space-y-5">
           <div className="flex space-x-2 items-center">
