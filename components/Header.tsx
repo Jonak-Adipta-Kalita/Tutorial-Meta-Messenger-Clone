@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import LogoutButton from "./LogoutButton";
 
 type Props = {};
 
@@ -27,12 +28,7 @@ const Header = (props: Props) => {
               <p className="font-bold text-lg">JAK Clone</p>
             </div>
           </div>
-          <button
-            onClick={() => {}}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Sign Out
-          </button>
+          <LogoutButton />
         </>
       ) : (
         <div className="flex flex-col items-center space-y-5">
