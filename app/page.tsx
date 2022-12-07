@@ -1,4 +1,3 @@
-import React from "react";
 import ChatInput from "../components/ChatInput";
 import MessageList from "../components/MessageList";
 
