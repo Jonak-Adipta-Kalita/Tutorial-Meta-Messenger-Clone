@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { v4 as uuid } from "uuid";
 
 type Props = {};
 
@@ -14,9 +15,14 @@ const ChatInput = (props: Props) => {
 
     const messageToSend = input;
 
-    // send the message
-
     setInput("");
+
+    const id = uuid();
+
+    const message = {
+      id,
+      message: messageToSend,
+    };
   };
 
   return (
