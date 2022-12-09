@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { v4 as uuid } from "uuid";
+import { Message } from "../typings";
 
 type Props = {};
 
@@ -19,10 +20,28 @@ const ChatInput = (props: Props) => {
 
     const id = uuid();
 
-    const message = {
+    const message: Message = {
       id,
       message: messageToSend,
+      created_at: Date.now(),
+      username: "JAK Clone",
+      profilePic: "https://avatars.githubusercontent.com/u/70377522?v=4",
+      email: "jonakadiptakalita@gmail.com",
     };
+
+    const uploadMessageToUpstash = async () => {
+      const res = await fetch("/api/addMessage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
+
+      const data = await res.json();
+    };
+
+    uploadMessageToUpstash();
   };
 
   return (
