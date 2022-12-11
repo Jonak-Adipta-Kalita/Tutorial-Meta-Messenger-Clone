@@ -4,5 +4,11 @@ module.exports = {
   experimental: {
     appDir: true,
   },
-  images: { domains: ["links.papareact.com"] },
+  images: {
+    domains: [
+      "links.papareact.com",
+      "platform-lookaside.fsbx.com",
+      "avatars.githubusercontent.com",
+    ],
+  },
 };
