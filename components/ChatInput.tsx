@@ -10,7 +10,7 @@ type Props = {};
 
 const ChatInput = (props: Props) => {
   const [input, setInput] = useState("");
-  const { data, error, mutate } = useSWR("/api/getMessages", fetcher);
+  const { data: messages, error, mutate } = useSWR("/api/getMessages", fetcher);
 
   const addMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,18 +33,21 @@ const ChatInput = (props: Props) => {
     };
 
     const uploadMessageToUpstash = async () => {
-      const res = await fetch("/api/addMessage", {
+      const data = (await fetch("/api/addMessage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ message }),
-      });
+      }).then((res) => res.json())) as { message: Message };
 
-      const data = await res.json();
+      return [data.message, ...messages!];
     };
 
-    uploadMessageToUpstash();
+    await mutate(uploadMessageToUpstash, {
+      optimisticData: [message, ...messages!],
+      rollbackOnError: true,
+    });
   };
 
   return (
