@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Message } from "../../typings";
 import redis from "../../redis";
+import { serverPusher } from "../../pusher";
 
 type Data = {
   message: Message | string;
@@ -19,6 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   };
 
   await redis.hset("messages", newMessage.id, JSON.stringify(newMessage));
+  serverPusher.trigger("messages", "new-message", newMessage);
 
   res.status(200).json({ message: newMessage });
 };
