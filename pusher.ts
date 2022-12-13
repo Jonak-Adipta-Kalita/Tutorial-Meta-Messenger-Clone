@@ -8,7 +8,7 @@ export const serverPusher = new Pusher({
   cluster: "ap2",
 });
 
-export const clientPusher = new ClientPusher("newMessage!!", {
+export const clientPusher = new ClientPusher("f2d6f6a9118795b7a4a2", {
   cluster: "ap2",
   forceTLS: true,
 });
