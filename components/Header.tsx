@@ -1,3 +1,6 @@
+"use client";
+
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
@@ -5,19 +8,19 @@ import LogoutButton from "./LogoutButton";
 type Props = {};
 
 const Header = (props: Props) => {
-  const session = true;
+  const session = useSession();
 
   return (
     <header
       className={`sticky top-0 z-50 bg-white flex justify-center items-center p-10 shadow-sm ${
-        session && "justify-between"
+        session?.data && "justify-between"
       }`}
     >
-      {session ? (
+      {session?.data ? (
         <>
           <div className="flex space-x-2">
             <Image
-              src="https://links.papareact.com/jne"
+              src={session?.data?.user?.image!}
               alt="profile-pic"
               height={10}
               width={50}
@@ -25,7 +28,7 @@ const Header = (props: Props) => {
             />
             <div className="">
               <p className="text-blue-400">Logged in as:</p>
-              <p className="font-bold text-lg">JAK Clone</p>
+              <p className="font-bold text-lg">{session?.data?.user?.name}</p>
             </div>
           </div>
           <LogoutButton />
